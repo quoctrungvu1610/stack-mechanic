@@ -6,12 +6,13 @@ public class Plate : MonoBehaviour
     [SerializeField] Transform itemHolderTransform;
     [SerializeField] float jumpPosY;
     [SerializeField] GameObject weapon;
-
-
+    [SerializeField] Transform check;
+    
     bool isAlreadyCollected = false;
     int numberOfItemHolding = 0;
-    Transform objectHolding;
 
+    Transform objectHolding;
+    
     void Awake()
     {
         //Set up the first object holding
@@ -27,6 +28,7 @@ public class Plate : MonoBehaviour
     {
         if (other.CompareTag("Item"))
         {
+            //FindEmptyPosition();
             ItemControl item;
             item = other.GetComponent<ItemControl>();
             if(item.GetItemCollectedStatus() == false){
@@ -73,7 +75,22 @@ public class Plate : MonoBehaviour
         objct = objct.GetChild(0);
     }
 
-    
-
-
+    public void FindEmptyPosition()
+    {
+        for(int i = 0; i < numberOfItemHolding;){
+            if(check.childCount > 1)
+            {
+                check = check.GetChild(0);
+                i++;
+                Debug.Log("Has Child");
+            }
+            else if(check.childCount == 1)
+            {
+                //check = check.GetChild(0);
+                objectHolding = check;
+                Debug.Log("not have Child");
+                break;
+            }
+        }
+    }
 }
