@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -7,6 +5,7 @@ public class Plate : MonoBehaviour
 {
     [SerializeField] Transform itemHolderTransform;
     [SerializeField] float jumpPosY;
+    [SerializeField] GameObject weapon;
 
 
     bool isAlreadyCollected = false;
@@ -18,9 +17,10 @@ public class Plate : MonoBehaviour
         //Set up the first object holding
         objectHolding = this.gameObject.transform.GetChild(0).GetChild(0);
     }
+
     void Update()
     {
-       
+       SetUpSphereWeapon();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,9 +28,7 @@ public class Plate : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             ItemControl item;
-
             item = other.GetComponent<ItemControl>();
-
             if(item.GetItemCollectedStatus() == false){
                 AddNewItem(other.transform);
                 item.ToggleStatus();
@@ -39,14 +37,16 @@ public class Plate : MonoBehaviour
         }
     }
 
-    private void AddNewItem(Transform itemToAdd){
+    private void AddNewItem(Transform itemToAdd)
+    {
         //Jump the Collide Object to the main Object
         itemToAdd.DOJump(itemHolderTransform.position + new Vector3(0, jumpPosY * numberOfItemHolding, -4 ),2f,1,0.2f).OnComplete(()=>{ 
             SetUpCollideItem(itemToAdd);  
         });
     }
    
-    private void SetUpCollideItem(Transform item){
+    private void SetUpCollideItem(Transform item)
+    {
         //Set Parent for Collide Object
         item.SetParent(objectHolding);
         //Set up the Position
@@ -59,7 +59,21 @@ public class Plate : MonoBehaviour
         objectHolding = objectHolding.GetChild(0);
     }
 
-    private void ChangeCurrentObjectHolding(Transform objct){
+    private void SetUpSphereWeapon()
+    {
+        weapon.transform.SetParent(objectHolding);
+
+        weapon.transform.localPosition = new Vector3(0, 2, 0);
+        weapon.transform.localRotation = Quaternion.identity;
+        weapon.transform.localScale = new Vector3(weapon.transform.localScale.x, weapon.transform.localScale.y, weapon.transform.localScale.z);
+    }
+
+    private void ChangeCurrentObjectHolding(Transform objct)
+    {
         objct = objct.GetChild(0);
     }
+
+    
+
+
 }
