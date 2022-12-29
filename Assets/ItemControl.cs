@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class ItemControl : MonoBehaviour
 {
-    // bool isAlreadyCollected = false;
-    // private void OnTriggerEnter(Collider other) {
-    // if(isAlreadyCollected) return;
-    //     if(other.CompareTag("Player")){
-    //         Plate plate;
-    //         if(other.TryGetComponent(out plate)){
-    //             plate.AddNewItem(this.transform);
-    //             isAlreadyCollected = true;
-    //         }
-    //     }
-    // }
+    public bool isAlreadyCollected = false;
+
+    public void ToggleStatus(){
+        isAlreadyCollected = !isAlreadyCollected;
+    }
+    public bool GetItemCollectedStatus(){
+        return isAlreadyCollected;
+    }
 }

@@ -6,7 +6,7 @@ public class SwerveMovement : MonoBehaviour
 {
     [SerializeField] private float maxDisplacement = 0.2f;
     [SerializeField] private float maxPositionX = 2f;
-    private Vector2 _anchorPosition;
+    private Vector2 anchorPosition;
 
 
     private void Update()
@@ -41,13 +41,13 @@ public class SwerveMovement : MonoBehaviour
         var inputX = 0f;
         if (Input.GetMouseButtonDown(0))
         {
-            _anchorPosition = Input.mousePosition;
+            anchorPosition = Input.mousePosition;
         }
 
         else if (Input.GetMouseButton(0))
         {
-            inputX = (Input.mousePosition.x - _anchorPosition.x);
-            _anchorPosition = Input.mousePosition;
+            inputX = (Input.mousePosition.x - anchorPosition.x);
+            anchorPosition = Input.mousePosition;
         }
         return inputX;
     }
