@@ -6,12 +6,14 @@ public class Plate : MonoBehaviour
     [SerializeField] Transform itemHolderTransform;
     [SerializeField] float jumpPosY;
     [SerializeField] GameObject weapon;
-    [SerializeField] Transform check;
+    
+    [SerializeField] Transform header;
     
     bool isAlreadyCollected = false;
     int numberOfItemHolding = 0;
 
     Transform objectHolding;
+    
     
     void Awake()
     {
@@ -21,6 +23,7 @@ public class Plate : MonoBehaviour
 
     void Update()
     {
+       FindEmptyPosition();
        SetUpSphereWeapon();
     }
 
@@ -77,18 +80,32 @@ public class Plate : MonoBehaviour
 
     public void FindEmptyPosition()
     {
-        for(int i = 0; i < numberOfItemHolding;){
-            if(check.childCount > 1)
+        Transform check1;
+        check1 = header;
+        for(int i = 0; i < numberOfItemHolding;i++){
+            if(check1.childCount > 1)
             {
-                check = check.GetChild(0);
-                i++;
-                Debug.Log("Has Child");
+                check1 = check1.GetChild(0);
             }
-            else if(check.childCount == 1)
+            else if(check1.childCount == 1)
             {
-                //check = check.GetChild(0);
-                objectHolding = check;
-                Debug.Log("not have Child");
+                Transform check2;  
+                objectHolding = check1;
+
+                check2 = check1;
+                numberOfItemHolding = i-1;
+                for(int y = 0; y < 14; y++)
+                {
+                    if(check2.childCount == 1)
+                    {
+                        check2 = check2.GetChild(0);
+                    }
+                    else if(check2.childCount > 1)
+                    {
+                        check2.GetChild(1).SetParent(null);
+                        check2 = check2.GetChild(0);
+                    }
+                }
                 break;
             }
         }

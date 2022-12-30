@@ -8,6 +8,10 @@ public class ItemControl : MonoBehaviour
     public bool isAlreadyCollected = false;
     Plate plate;
 
+    private void Update() {
+        UseGravity();
+    }
+    
     private void Start() {
         rb = gameObject.GetComponent<Rigidbody>();
         plate = FindObjectOfType<Plate>();
@@ -26,8 +30,15 @@ public class ItemControl : MonoBehaviour
         if(other.gameObject.CompareTag("Wall"))
         {
             gameObject.transform.parent = null;
+            
+            //plate.FindEmptyPosition();
+        }
+    }
+    void UseGravity()
+    {
+        if (transform.parent == null)
+        {
             rb.useGravity = true;
-            plate.FindEmptyPosition();
         }
     }
 }
