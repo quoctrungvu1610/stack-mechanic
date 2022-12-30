@@ -6,14 +6,12 @@ public class Plate : MonoBehaviour
     [SerializeField] Transform itemHolderTransform;
     [SerializeField] float jumpPosY;
     [SerializeField] GameObject weapon;
-    
     [SerializeField] Transform header;
     
     bool isAlreadyCollected = false;
     int numberOfItemHolding = 0;
 
     Transform objectHolding;
-    
     
     void Awake()
     {
@@ -23,22 +21,25 @@ public class Plate : MonoBehaviour
 
     void Update()
     {
-       FindEmptyPosition();
-       SetUpSphereWeapon();
+        
+        SetUpSphereWeapon();
+       
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag("Item"))
         {
-            //FindEmptyPosition();
+            
+            
             ItemControl item;
             item = other.GetComponent<ItemControl>();
             if(item.GetItemCollectedStatus() == false){
                 AddNewItem(other.transform);
                 item.ToggleStatus();
             }
-            //other.gameObject.GetComponent<BoxCollider>().enabled = false;
+           // other.gameObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
 
@@ -52,6 +53,7 @@ public class Plate : MonoBehaviour
    
     private void SetUpCollideItem(Transform item)
     {
+        
         //Set Parent for Collide Object
         item.SetParent(objectHolding);
         //Set up the Position
@@ -66,6 +68,7 @@ public class Plate : MonoBehaviour
 
     private void SetUpSphereWeapon()
     {
+        FindEmptyPosition();
         weapon.transform.SetParent(objectHolding);
 
         weapon.transform.localPosition = new Vector3(0, 2, 0);
@@ -81,31 +84,35 @@ public class Plate : MonoBehaviour
     public void FindEmptyPosition()
     {
         Transform check1;
-        check1 = header;
+        Transform check2;
+        check1 = transform;
+        
         for(int i = 0; i < numberOfItemHolding;i++){
+
             if(check1.childCount > 1)
             {
                 check1 = check1.GetChild(0);
             }
+
             else if(check1.childCount == 1)
             {
-                Transform check2;  
-                objectHolding = check1;
-
-                check2 = check1;
+                 
+                objectHolding = check1; 
                 numberOfItemHolding = i-1;
-                for(int y = 0; y < 14; y++)
+                check2 = check1;
+
+                for(int y = 0; y < 15 - numberOfItemHolding; y++)
                 {
-                    if(check2.childCount == 1)
+
+                    if(check2.childCount > 1)
                     {
-                        check2 = check2.GetChild(0);
+                        if(check2.GetChild(1).gameObject.name != "Weapon"){
+                            check2.GetChild(1).SetParent(null);
+                        }      
                     }
-                    else if(check2.childCount > 1)
-                    {
-                        check2.GetChild(1).SetParent(null);
-                        check2 = check2.GetChild(0);
-                    }
-                }
+                    check2 = check2.GetChild(0);
+                }       
+
                 break;
             }
         }

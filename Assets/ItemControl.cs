@@ -31,7 +31,6 @@ public class ItemControl : MonoBehaviour
         {
             gameObject.transform.parent = null;
             
-            //plate.FindEmptyPosition();
         }
     }
     void UseGravity()
