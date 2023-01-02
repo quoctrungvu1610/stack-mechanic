@@ -21,8 +21,8 @@ public class Plate : MonoBehaviour
 
     void Update()
     {
-        
-        SetUpSphereWeapon();
+
+        FindEmptyPosition();
        
     }
 
@@ -54,7 +54,7 @@ public class Plate : MonoBehaviour
     private void SetUpCollideItem(Transform item)
     {
         
-        //Set Parent for Collide Object
+        //Set Parent for Collide Objecat
         item.SetParent(objectHolding);
         //Set up the Position
         item.localPosition = new Vector3(0,0,0);
@@ -63,7 +63,8 @@ public class Plate : MonoBehaviour
         //Increase the index
         numberOfItemHolding++;
         //Chage the object Holding
-        objectHolding = objectHolding.GetChild(0);
+        //objectHolding = objectHolding.GetChild(0);
+        
     }
 
     private void SetUpSphereWeapon()
@@ -84,37 +85,56 @@ public class Plate : MonoBehaviour
     public void FindEmptyPosition()
     {
         Transform check1;
-        Transform check2;
-        check1 = transform;
-        
-        for(int i = 0; i < numberOfItemHolding;i++){
 
-            if(check1.childCount > 1)
+        check1 = this.transform;
+
+        for(int i = 0; i < 15; i++){
+            if (check1.childCount <= 1)
             {
-                check1 = check1.GetChild(0);
-            }
-
-            else if(check1.childCount == 1)
-            {
-                 
-                objectHolding = check1; 
-                numberOfItemHolding = i-1;
-                check2 = check1;
-
-                for(int y = 0; y < 15 - numberOfItemHolding; y++)
-                {
-
-                    if(check2.childCount > 1)
-                    {
-                        if(check2.GetChild(1).gameObject.name != "Weapon"){
-                            check2.GetChild(1).SetParent(null);
-                        }      
-                    }
-                    check2 = check2.GetChild(0);
-                }       
-
+                objectHolding = check1;
                 break;
             }
+            else
+            {
+                check1 = check1.GetChild(0);
+            }   
         }
+        
+
+
+        // Transform check1;
+        // Transform check2;
+
+        // check1 = transform;
+        
+        // for(int i = 0; i < numberOfItemHolding;i++){
+
+        //     if(check1.childCount > 1)
+        //     {
+        //         check1 = check1.GetChild(0);
+        //     }
+
+        //     else if(check1.childCount == 1)
+        //     {
+                 
+        //         objectHolding = check1; 
+        //         numberOfItemHolding = i-1;
+        //         check2 = check1;
+
+        //         for(int y = 0; y < 15 - numberOfItemHolding; y++)
+        //         {
+
+        //             if(check2.childCount > 1)
+        //             {
+        //                 if(check2.GetChild(1).gameObject.name != "Weapon"){
+        //                     check2.GetChild(1).SetParent(null);
+        //                 }      
+        //             }
+        //             check2 = check2.GetChild(0);
+        //         }       
+
+        //         break;
+        //     }
+        // }
     }
 }
