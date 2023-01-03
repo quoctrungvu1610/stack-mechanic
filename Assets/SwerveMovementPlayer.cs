@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwerveMovement : MonoBehaviour
+public class SwerveMovementPlayer : MonoBehaviour
 {
     [SerializeField] private float maxDisplacement = 0.2f;
     [SerializeField] private float maxPositionX = 2f;

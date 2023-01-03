@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveForward : MonoBehaviour
+public class MovePlayerForward : MonoBehaviour
 {
     [SerializeField] float speed = 1f;
     private void Start() {

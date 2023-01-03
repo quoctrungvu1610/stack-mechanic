@@ -1,12 +1,12 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class Plate : MonoBehaviour
+public class PlayerStackMechanic : MonoBehaviour
 {
     [SerializeField] Transform itemHolderTransform;
     [SerializeField] float jumpPosY;
-    [SerializeField] GameObject weapon;
-    [SerializeField] Transform header;
+
+    WeaponPickup weapon;
     
     int numberOfItemHolding = 0;
 
@@ -20,19 +20,27 @@ public class Plate : MonoBehaviour
     void Update()
     {
         FindEmptyPosition();
-        SetUpSphereWeapon(); 
+        SetUpTopItem(); 
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Item"))
         {
-            ItemControl item;
-            item = other.GetComponent<ItemControl>();
+            ItemPickup item;
+            item = other.GetComponent<ItemPickup>();
             if(item.IsAlreadyCollected == false){
                 AddNewItem(other.transform);
                 item.ToggleStatus();
             }
+        }
+        else if(other.CompareTag("Weapon")){
+            WeaponPickup weaponPickup;
+            weaponPickup = other.GetComponent<WeaponPickup>();
+            this.weapon = weaponPickup;
+            this.weapon.transform.DOJump(itemHolderTransform.position + new Vector3(0, (jumpPosY + 0.1f) * numberOfItemHolding, -4), 2f, 1, 0.2f).OnComplete(()=>{
+                weaponPickup.ToggleStatus();
+            });
         }
     }
 
@@ -52,12 +60,17 @@ public class Plate : MonoBehaviour
         item.localScale = new Vector3(item.transform.localScale.x, 1, item.transform.localScale.z);       
     }
 
-    private void SetUpSphereWeapon()
+    private void SetUpTopItem()
     {
-        weapon.transform.SetParent(objectHolding.GetChild(0));
-        weapon.transform.localPosition = new Vector3(0, 1, 0);
-        weapon.transform.localRotation = Quaternion.identity;
-        weapon.transform.localScale = new Vector3(weapon.transform.localScale.x, weapon.transform.localScale.y, weapon.transform.localScale.z);
+        if(weapon!=null){
+            if (weapon.IsAlreadyCollected)
+            {
+                weapon.transform.SetParent(objectHolding.GetChild(0));
+                weapon.transform.localPosition = new Vector3(0, 1, 0);
+                weapon.transform.localRotation = Quaternion.identity;
+                weapon.transform.localScale = new Vector3(weapon.transform.localScale.x, weapon.transform.localScale.y, weapon.transform.localScale.z);
+            }
+        }
     }
 
     public void FindEmptyPosition()
