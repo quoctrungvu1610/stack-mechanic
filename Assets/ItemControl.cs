@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemControl : MonoBehaviour
+public class ItemControl : MonoBehaviour,IPickable
 {
     Rigidbody rb;
     public bool isAlreadyCollected = false;
     Plate plate;
 
-    private void Update() {
-        UseGravity();
-    }
-    
-    private void Start() {
+    public bool IsAlreadyCollected => isAlreadyCollected;
+
+    private void Awake() {
         rb = gameObject.GetComponent<Rigidbody>();
         plate = FindObjectOfType<Plate>();
     }
@@ -21,23 +17,17 @@ public class ItemControl : MonoBehaviour
         isAlreadyCollected = !isAlreadyCollected;
     }
 
-    public bool GetItemCollectedStatus(){
-        return isAlreadyCollected;
+    public void HandlePickItem()
+    {
+        
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Wall"))
+        if (other.gameObject.CompareTag("Wall"))
         {
             gameObject.transform.parent = null;
-            
-        }
-    }
-    void UseGravity()
-    {
-        if (transform.parent == null)
-        {
-            rb.useGravity = true;
+
         }
     }
 }
