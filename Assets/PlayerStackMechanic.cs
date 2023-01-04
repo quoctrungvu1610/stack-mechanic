@@ -66,7 +66,7 @@ public class PlayerStackMechanic : MonoBehaviour
             if (weapon.IsAlreadyCollected)
             {
                 weapon.transform.SetParent(objectHolding.GetChild(0));
-                weapon.transform.localPosition = new Vector3(0, 1, 0);
+                weapon.transform.localPosition = new Vector3(0, 0, 0);
                 weapon.transform.localRotation = Quaternion.identity;
                 weapon.transform.localScale = new Vector3(weapon.transform.localScale.x, weapon.transform.localScale.y, weapon.transform.localScale.z);
             }
@@ -80,14 +80,14 @@ public class PlayerStackMechanic : MonoBehaviour
 
         check1 = this.transform;
         for(int i = 0; i < 15; i++){  
-            if (check1.childCount <= 1)
+            if (check1.childCount <= 2 && check1.gameObject.name != "Head")
             {
                 objectHolding = check1;
                 check2 = check1;
                 for(int y = 0; y < 15 - numberOfItemHolding;y++)
                 {
-                    if(check2.childCount > 1 && check2.GetChild(1).name != "Weapon"){
-                        check2.GetChild(1).SetParent(null);
+                    if(check2.childCount > 2){
+                        check2.GetChild(2).SetParent(null);
                     }
                     check2 = check2.GetChild(0);    
                 }
