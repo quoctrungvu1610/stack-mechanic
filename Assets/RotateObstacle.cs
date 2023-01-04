@@ -9,7 +9,7 @@ public class RotateObstacle : Obstacle,IRotateable,IDamageable
 
     public void RotateObstacleObject()
     {
-        transform.Rotate(new Vector3(0, 15, 0));
+        transform.Rotate(new Vector3(0, 5, 0));
     }
 
     void Update()

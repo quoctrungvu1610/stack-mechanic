@@ -17,15 +17,18 @@ public class ItemPickup : MonoBehaviour,IPickable
 
     public void HandlePickItem()
     {
-        
+        throw new System.NotImplementedException();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Wall"))
-        {
-            gameObject.transform.parent = null;
+        if(IsAlreadyCollected){
+            if (other.gameObject.CompareTag("Obstacle"))
+            {
+                gameObject.transform.parent = null;
 
+            }
         }
     }
+
 }
