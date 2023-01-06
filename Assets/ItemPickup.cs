@@ -2,12 +2,16 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour,IPickable
 {
+    PlayerStackMechanic playerStackMechanic;
     Rigidbody rb;
     public bool isAlreadyCollected = false;
 
     public bool IsAlreadyCollected => isAlreadyCollected;
 
+    public bool isCollided = false;
+
     private void Awake() {
+        playerStackMechanic = FindObjectOfType<PlayerStackMechanic>().gameObject.GetComponent<PlayerStackMechanic>();
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -25,10 +29,15 @@ public class ItemPickup : MonoBehaviour,IPickable
         if(IsAlreadyCollected){
             if (other.gameObject.CompareTag("Obstacle"))
             {
-                gameObject.transform.parent = null;
+                RotateObstacle obstacle;
 
+                obstacle = other.gameObject.GetComponent<RotateObstacle>();
+
+                if(obstacle.IsCollided == false){
+                    playerStackMechanic.ToogleIsCollideItem();
+                    obstacle.ToogleCollideStatus();
+                }
             }
         }
     }
-
 }
