@@ -46,6 +46,8 @@ public class PlayerStackMechanic : MonoBehaviour
 
     private void AddNewItem(Transform itemToAdd)
     {
+        objectHolding.GetChild(1).gameObject.SetActive(true);
+
         itemToAdd.DOJump(itemHolderTransform.position + new Vector3(0, jumpPosY * numberOfItemHolding, -4 ),2f,1,0.2f).OnComplete(()=>{ 
             SetUpCollideItem(itemToAdd);  
         });
@@ -53,8 +55,8 @@ public class PlayerStackMechanic : MonoBehaviour
    
     private void SetUpCollideItem(Transform item)
     {
-        
         item.SetParent(objectHolding);
+
         item.localPosition = new Vector3(0,0,0);
         item.localRotation = Quaternion.identity;
         item.localScale = new Vector3(item.transform.localScale.x, 1, item.transform.localScale.z);       
@@ -79,18 +81,23 @@ public class PlayerStackMechanic : MonoBehaviour
         Transform check2;
 
         check1 = this.transform;
-        for(int i = 0; i < 15; i++){  
+        for(int i = 0; i < 20; i++)
+        {  
             if (check1.childCount <= 2 && check1.gameObject.name != "Head")
             {
                 objectHolding = check1;
                 check2 = check1;
-                for(int y = 0; y < 15 - numberOfItemHolding;y++)
+                for(int y = 0; y < 20 - numberOfItemHolding;y++)
                 {
-                    if(check2.childCount > 2){
+                    if(check2.childCount > 2)
+                    {
                         check2.GetChild(2).SetParent(null);
+                        check2.GetChild(1).gameObject.SetActive(false);
                     }
+
                     check2 = check2.GetChild(0);    
                 }
+
                 break;
             }
             else
