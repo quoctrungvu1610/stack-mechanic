@@ -981,6 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &123673693
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3720,6 +3721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!65 &397153539
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5354,6 +5356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &539849683
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7498,6 +7501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &804121788
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7704,6 +7708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &819160416
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7775,6 +7780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &820060348
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8402,6 +8408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &909957460
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9668,6 +9675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &976705320
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9879,6 +9887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &997405960
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10114,6 +10123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &1014058258
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10347,6 +10357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &1041589836
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12039,6 +12050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &1209535066
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14322,6 +14334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &1360930211
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14581,6 +14594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &1379877906
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15472,6 +15486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &1428467337
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17660,6 +17675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &1599075039
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18738,6 +18754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &1670819394
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19602,6 +19619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &1760447159
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20257,6 +20275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &1811294217
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22148,6 +22167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba0ffb88df89041924245bb37ac684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStackMechanic: {fileID: 576756427}
 --- !u!54 &2000345976
 Rigidbody:
   m_ObjectHideFlags: 0
