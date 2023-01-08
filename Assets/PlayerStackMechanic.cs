@@ -6,23 +6,25 @@ public class PlayerStackMechanic : MonoBehaviour
     [SerializeField] Transform itemHolderTransform;
     [SerializeField] float jumpPosY;
     [SerializeField] GameObject[] bones;
-    WeaponPickup weapon;
-    int numberOfItemHolding = 0;
-    Transform objectHolding;
     public bool isItemCollided = false;
     private bool isLoadingAnimation = false;
+    private int numberOfItemHolding = 0;
+    private int checkKey;
+    WeaponPickup weapon;
+    Transform objectHolding;
     
     void Awake()
     {
         objectHolding = bones[numberOfItemHolding].transform;
+        checkKey = numberOfItemHolding;
     }
 
     void Update()
     {
         SetUpTopItem(); 
-        Debug.Log(numberOfItemHolding);
+        Debug.Log(checkKey);
         objectHolding = bones[numberOfItemHolding].transform;
-        RebuildBehaviour();
+        StartRebuildBehaviour();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,7 +38,7 @@ public class PlayerStackMechanic : MonoBehaviour
                 if(item.IsAlreadyCollected == false){
                     item.HandlePickItem(itemHolderTransform,jumpPosY * numberOfItemHolding);
                     objectHolding.GetChild(0).gameObject.SetActive(true);
-                    numberOfItemHolding += 1;
+                    IncreaseNumberOfItemHolding();
                 }   
             }
 
@@ -62,11 +64,20 @@ public class PlayerStackMechanic : MonoBehaviour
                 weapon.transform.localPosition = new Vector3(0, 0, 0);
                 weapon.transform.localRotation = Quaternion.identity;
                 weapon.transform.localScale = new Vector3(weapon.transform.localScale.x, weapon.transform.localScale.y, weapon.transform.localScale.z);
+                if(checkKey != numberOfItemHolding)
+                {
+                    Vector3 endVal = Vector3.zero;
+                    Vector3 scaleVal = new Vector3(1.5f,0.5f,1.5f);
+                    weapon.transform.DOScale(endVal,0.5f).OnComplete(()=>{
+                        weapon.transform.DOScale(scaleVal, 0.5f);
+                        checkKey = numberOfItemHolding;
+                    });
+                }
             }
         }
     }
 
-    IEnumerator RemoveAllItem()
+    IEnumerator RebuildBehavior()
     {
         isLoadingAnimation = true;
         weapon.transform.DOScale(new Vector3(0,0,0),0.5f);
@@ -98,11 +109,11 @@ public class PlayerStackMechanic : MonoBehaviour
         isLoadingAnimation = false;
     }
     
-    void RebuildBehaviour()
+    void StartRebuildBehaviour()
     {
         if(isItemCollided)
         {
-            StartCoroutine(RemoveAllItem());
+            StartCoroutine(RebuildBehavior());
             isItemCollided = false;
         }
     }
@@ -118,9 +129,11 @@ public class PlayerStackMechanic : MonoBehaviour
             isItemCollided = true;
         }
      }
+
      public void IncreaseNumberOfItemHolding(){
         numberOfItemHolding++;
      }
+
      public void DecreaseNumberOfItemHolding(){
         numberOfItemHolding--;
      }
