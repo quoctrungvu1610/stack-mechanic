@@ -6,7 +6,8 @@ public class PlayerStackMechanic : MonoBehaviour
     [SerializeField] Transform itemHolderTransform;
     [SerializeField] float jumpPosY;
     [SerializeField] GameObject[] bones;
-    [SerializeField] float unstackSpeed = 0.1f;
+    [SerializeField] float unstackTime = 0.1f;
+    [SerializeField] float stackTime = 0.1f;
     public bool isItemCollided = false;
     private bool isLoadingAnimation = false;
     private int numberOfItemHolding = 0;
@@ -28,6 +29,8 @@ public class PlayerStackMechanic : MonoBehaviour
         objectHolding = bones[numberOfItemHolding].transform;
         StartRebuildBehaviour();
     }
+
+    public int NumberOfItemHolding => numberOfItemHolding;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -89,12 +92,10 @@ public class PlayerStackMechanic : MonoBehaviour
             boneAnimator = bones[i].transform.GetChild(0).GetComponent<Animator>();
 
             boneAnimator.SetBool("Out",true);
-            yield return new WaitForSeconds(unstackSpeed); 
+            yield return new WaitForSeconds(unstackTime/numberOfItemHolding); 
 
-            bones[i].transform.GetChild(0).gameObject.SetActive(false);   
-            yield return new WaitForSeconds(1/numberOfItemHolding);    
+            bones[i].transform.GetChild(0).gameObject.SetActive(false);     
         }
-        //yield return new WaitForSeconds(0.1f);
         DecreaseNumberOfItemHolding();   
         StartCoroutine(AddItemFromStart());
     }
@@ -104,7 +105,7 @@ public class PlayerStackMechanic : MonoBehaviour
         for(int i = 0; i < numberOfItemHolding; i++)
         {
             bones[i].transform.GetChild(0).gameObject.SetActive(true); 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(stackTime/numberOfItemHolding);
         }
         
         weapon.transform.DOScale(new Vector3(1.5f,0.5f,1.5f),0.5f);
