@@ -31,8 +31,8 @@ public class ItemPickup : MonoBehaviour,IPickable
     private void JumpToObject(Transform itemHolderTransform, float jumpYPosition)
     {
         Vector3 endVal = Vector3.zero;
-        itemTransform.DOScale(endVal,2);
-        itemTransform.DOJump(itemHolderTransform.position + new Vector3(0, jumpYPosition, -4 ),2f,1,0.2f).OnComplete(()=>{
+        itemTransform.DOScale(endVal,0.5f);
+        itemTransform.DOJump(itemHolderTransform.position + new Vector3(0, jumpYPosition, -3 ),2f,1,0.3f).OnComplete(()=>{
             itemTransform.gameObject.SetActive(false);
         });
     }
