@@ -26,8 +26,8 @@ public class FollowCMCamController : MonoBehaviour
             {
                 for(int i = 0; i < 10; i++)
                 {
-                    CMFollowVCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += 0.01f;
-                    yield return new WaitForSeconds(0.2f);
+                    CMFollowVCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance += 0.02f;
+                    yield return new WaitForSeconds(0.1f);
                 }
             }
             else if(keyCheck > playerStackMechanic.NumberOfItemHolding)
@@ -35,7 +35,7 @@ public class FollowCMCamController : MonoBehaviour
                 for(int i = 0; i < 10; i++)
                 {
                     CMFollowVCam.GetCinemachineComponent<CinemachineFramingTransposer>().m_CameraDistance -= 0.01f;
-                    yield return new WaitForSeconds(0.2f);
+                    yield return new WaitForSeconds(0.1f);
                 }
             }
             

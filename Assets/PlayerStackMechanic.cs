@@ -11,8 +11,8 @@ public class PlayerStackMechanic : MonoBehaviour
     public bool isItemCollided = false;
     private bool isLoadingAnimation = false;
     private int numberOfItemHolding = 0;
-    private string[] inAnimaton = {"Left","Right"};
     private int checkKey;
+    private int rebuildCheckey;
     WeaponPickup weapon;
     Transform objectHolding;
     
@@ -25,13 +25,15 @@ public class PlayerStackMechanic : MonoBehaviour
     void Update()
     {
         SetUpTopItem(); 
-        Debug.Log(checkKey);
         objectHolding = bones[numberOfItemHolding].transform;
         StartRebuildBehaviour();
+        Debug.Log(rebuildCheckey);
     }
 
     public int NumberOfItemHolding => numberOfItemHolding;
-
+    
+    public bool IsLoadingAnimation => isLoadingAnimation;
+    
     private void OnTriggerEnter(Collider other)
     {
         if(isLoadingAnimation == false)
@@ -65,11 +67,11 @@ public class PlayerStackMechanic : MonoBehaviour
         {
             if (weapon.IsAlreadyCollected)
             {
-                weapon.transform.SetParent(bones[numberOfItemHolding + 1].transform);
+                weapon.transform.SetParent(bones[numberOfItemHolding].transform);
                 weapon.transform.localPosition = new Vector3(0, 0, 0);
                 weapon.transform.localRotation = Quaternion.identity;
                 weapon.transform.localScale = new Vector3(weapon.transform.localScale.x, weapon.transform.localScale.y, weapon.transform.localScale.z);
-                if(checkKey != numberOfItemHolding)
+                if(checkKey != numberOfItemHolding && isLoadingAnimation == false)
                 {
                     Vector3 endVal = Vector3.zero;
                     Vector3 scaleVal = new Vector3(1.5f,0.5f,1.5f);
@@ -85,37 +87,39 @@ public class PlayerStackMechanic : MonoBehaviour
     IEnumerator RebuildBehavior()
     {
         isLoadingAnimation = true;
-        weapon.transform.DOScale(new Vector3(0,0,0),0.5f);
-        for(int i = numberOfItemHolding-1 ; i >= 0; i--){
-
+        rebuildCheckey = numberOfItemHolding;
+        for(int i = rebuildCheckey - 1; i >= 0; i--)
+        {
             Animator boneAnimator;
             boneAnimator = bones[i].transform.GetChild(0).GetComponent<Animator>();
 
             boneAnimator.SetBool("Out",true);
             yield return new WaitForSeconds(unstackTime/numberOfItemHolding); 
-
+            
             bones[i].transform.GetChild(0).gameObject.SetActive(false);     
+            numberOfItemHolding -= 1;
+            yield return new WaitForSeconds(0.001f); 
         }
-        DecreaseNumberOfItemHolding();   
+        rebuildCheckey -= 1;
+        yield return new WaitForSeconds(0.1f); 
         StartCoroutine(AddItemFromStart());
     }
-
+    
     IEnumerator AddItemFromStart()
     { 
-        for(int i = 0; i < numberOfItemHolding; i++)
+        for(int i = 0; i < rebuildCheckey ; i++)
         {
             bones[i].transform.GetChild(0).gameObject.SetActive(true); 
+            numberOfItemHolding += 1;
             yield return new WaitForSeconds(stackTime/numberOfItemHolding);
-        }
-        
-        weapon.transform.DOScale(new Vector3(1.5f,0.5f,1.5f),0.5f);
-        yield return new WaitForSeconds(0.1f);
+        }   
+        checkKey = numberOfItemHolding;
         isLoadingAnimation = false;
     }
     
     void StartRebuildBehaviour()
     {
-        if(isItemCollided)
+        if(isItemCollided && isLoadingAnimation == false)
         {
             StartCoroutine(RebuildBehavior());
             isItemCollided = false;
@@ -134,11 +138,13 @@ public class PlayerStackMechanic : MonoBehaviour
         }
      }
 
-     public void IncreaseNumberOfItemHolding(){
+     public void IncreaseNumberOfItemHolding()
+     {
         numberOfItemHolding++;
      }
 
-     public void DecreaseNumberOfItemHolding(){
+     public void DecreaseNumberOfItemHolding()
+     {
         numberOfItemHolding--;
      }
 }

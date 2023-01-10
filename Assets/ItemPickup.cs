@@ -32,7 +32,7 @@ public class ItemPickup : MonoBehaviour,IPickable
     {
         Vector3 endVal = Vector3.zero;
         itemTransform.DOScale(endVal,0.5f);
-        itemTransform.DOJump(itemHolderTransform.position + new Vector3(0, jumpYPosition, -3 ),2f,1,0.3f).OnComplete(()=>{
+        itemTransform.DOJump(itemHolderTransform.position + new Vector3(0, jumpYPosition, -3 ),2f,1,0.7f).OnComplete(()=>{
             itemTransform.gameObject.SetActive(false);
         });
     }
