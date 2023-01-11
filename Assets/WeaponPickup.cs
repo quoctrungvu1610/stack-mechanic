@@ -1,11 +1,10 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class WeaponPickup : MonoBehaviour, IPickable,IRotateable
+public class WeaponPickup : MonoBehaviour, IPickable,IRotateable,IToggleStatus
 {
     [SerializeField] float weaponStrength;
     [SerializeField] GameObject gameObjectHolder;
-
     Transform weaponTransform;
     public bool isAlreadyPickupWeapon = false;
     public bool IsAlreadyCollected => isAlreadyPickupWeapon;
@@ -34,7 +33,7 @@ public class WeaponPickup : MonoBehaviour, IPickable,IRotateable
         });
     }
 
-    private void ToggleStatus()
+    public void ToggleStatus()
     {
         isAlreadyPickupWeapon = !isAlreadyPickupWeapon;
     }

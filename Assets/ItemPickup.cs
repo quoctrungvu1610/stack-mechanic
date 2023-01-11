@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
-public class ItemPickup : MonoBehaviour,IPickable
+public class ItemPickup : MonoBehaviour,IPickable,IToggleStatus
 {
     PlayerStackMechanic playerStackMechanic;
     Rigidbody rb;
@@ -17,7 +17,7 @@ public class ItemPickup : MonoBehaviour,IPickable
         itemTransform = transform;
     }
 
-    private void ToggleStatus()
+    public void ToggleStatus()
     {
         isAlreadyCollected = !isAlreadyCollected;
     }

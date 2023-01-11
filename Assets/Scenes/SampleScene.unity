@@ -16671,7 +16671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493116242}
   m_LocalRotation: {x: 0.058048308, y: -0.065553084, z: 0.003819945, w: 0.9961519}
-  m_LocalPosition: {x: 7.366103, y: 10.548811, z: -42.653263}
+  m_LocalPosition: {x: 8.008272, y: 10.548811, z: -42.56838}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16693,6 +16693,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CMFollowVCam: {fileID: 1493116243}
   playerStackMechanic: {fileID: 576756427}
+  cameraMaxZoomOutDistance: 100
+  cameraMaxZoomInDistance: 65
 --- !u!1 &1501963543
 GameObject:
   m_ObjectHideFlags: 0
@@ -18259,7 +18261,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620937211}
   m_LocalRotation: {x: 0.058048308, y: -0.065553084, z: 0.003819945, w: 0.9961519}
-  m_LocalPosition: {x: 7.366103, y: 10.548811, z: -42.653263}
+  m_LocalPosition: {x: 8.008272, y: 10.548811, z: -42.56838}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
